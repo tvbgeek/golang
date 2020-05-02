@@ -10,6 +10,25 @@ import (
 	"fmt"
 )
 
+// maintains the order of elements
+// O(n)
+func removeOrdered(a []int, i int) ([]int) {
+	if len(a) == 0 {
+		return a
+	}
+	return append(a[:i], a[i+1:]...)
+}
+
+// does not maintain the order of the elements
+// O(1)
+func removeUnordered(a []int, i int) ([]int) {
+	if len(a) == 0 {
+		return a
+	}
+	a[i] = a[len(a)-1]
+	return a[:len(a)-1]
+}
+
 func main() {
 
 	// create a slice
@@ -43,7 +62,7 @@ func main() {
 	arr = []int{0, 1, 2, 3, 4}
 	fmt.Println("our new slice", arr)
 
-	//range over slice elements
+	// iterating over slice elements
 	for i, val := range arr {
 		fmt.Println("index:", i, "val:", val)
 	}
@@ -68,14 +87,15 @@ func main() {
 
 	//remove an element
 	//https://stackoverflow.com/questions/37334119/how-to-delete-an-element-from-a-slice-in-golang/37335777#37335777
-	fmt.Println("remove ordered")
-
 	// O(n) remove maintains the ordering of the elements
-	arr = removeOrdered(arr, i)
-	fmt.Println("remove element at 0th index", arr)
+	arr = removeOrdered(arr, 0)
+	fmt.Println("remove element at 0th index ordered", arr)
 
 	// O(1) remove does not maintain the ordering of the elements
-	arr = removeUnordered(arr, i)
-	fmt.Println("remove element at 0th index", arr)
+	arr = removeUnordered(arr, 0)
+	fmt.Println("remove element at 0th index unordered", arr)
 
+	// deletign a slice 
+	arr = nil
+	fmt.Println("delete slice completely", arr)
 }
