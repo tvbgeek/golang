@@ -35,6 +35,15 @@ func main() {
 	arr := make([]int, 2)
 	fmt.Println("slice", arr)
 
+	// create a slice of size 0 and try accessing it 
+	tmp := make([]int, 0)
+	// the following assignments will throw error, index out of bounds
+	// tmp[0] = 1
+	// tmp[1] = 2
+	// though you can use append 
+	tmp = append(tmp, 1)
+	tmp = append(tmp, 2)
+	
 	// update value at any index
 	arr[0] = 1
 	fmt.Println("slice after updating value at 0th index", arr)
