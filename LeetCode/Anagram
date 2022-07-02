@@ -1,0 +1,73 @@
+/* 
+
+Valid Anagram
+
+Solution
+Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+ 
+
+Example 1:
+
+Input: s = "anagram", t = "nagaram"
+Output: true
+Example 2:
+
+Input: s = "rat", t = "car"
+Output: false
+ 
+
+Constraints:
+
+1 <= s.length, t.length <= 5 * 104
+s and t consist of lowercase English letters.
+ 
+
+Follow up: What if the inputs contain Unicode characters? How would you adapt your solution to such a case?
+
+*/
+
+func isAnagram(s string, t string) bool {
+    
+    // if length is different it can't be an anagram
+    if len(s) != len(t) {
+        return false
+    }
+    
+    dc1 := make(map[rune]int, 0)
+    dc2 := make(map[rune]int, 0)
+    
+    for _, char := range s {
+        _, prs := dc1[char]
+        if prs {
+            dc1[char] = dc1[char] + 1
+        } else {
+            dc1[char] = 1
+        }
+    }
+    
+    for _, char := range t {
+        _, prs := dc2[char]
+        if prs {
+            dc2[char] = dc2[char] + 1
+        } else {
+            dc2[char] = 1
+        }
+    }
+    
+    // if map/dictionary lengths are different it can't be an anagram
+    if len(dc1) != len(dc2) {
+        return false
+    }
+    
+    for k1, v1 := range dc1 {
+        count, prs := dc2[k1]
+        if !prs || count != v1 {
+            return false
+        }
+    }
+    
+    return true
+}
